@@ -1,8 +1,21 @@
-import os.path
+import pathlib
+import random
+import string
+import json
 
-BASE_DIR = os.path.dirname(os.path.realpath("PassManager.py"))
-BASE_DIR = '{}/PassMan'.format(BASE_DIR)
-JSON_DIR = '{}/Passwords/test.json'.format(BASE_DIR)  
+# Make the directory inside the PassMan
+BASE_DIR = (pathlib.Path(__file__) / ".." / ".." ).resolve()
+# Making the Passwords directory and the json file if it doesn't exist
+pathlib.Path(BASE_DIR / "Passwords").mkdir(parents=True, exist_ok=True)
 
-with open(JSON_DIR, "w+") as f:
-    print("hello")
+if not (pathlib.Path(BASE_DIR / "Passwords" / "test.json")).exists():
+    with open(pathlib.Path(BASE_DIR / "Passwords" / "test.json").resolve(), "a+") as f:
+        #f.write("Pass ={\n\t'Name': 'no',\n\t'password' : 'password'\n}")
+        print()
+
+
+def newPass():
+    length = 16
+    password = "".join(random.sample(string.ascii_letters + string.digits + string.punctuation, length))
+    return password
+
