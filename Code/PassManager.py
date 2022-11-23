@@ -18,4 +18,3 @@ def newPass():
     length = 16
     password = "".join(random.sample(string.ascii_letters + string.digits + string.punctuation, length))
     return password
-
